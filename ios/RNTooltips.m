@@ -38,8 +38,8 @@ RCT_EXPORT_METHOD(Show:(nonnull NSNumber *)targetViewTag inParentView:(nonnull N
   }
     
   NSString *text = [props objectForKey: @"text"];
-//  NSNumber *position = [props objectForKey: @"position"]; // not used yet
-//  NSNumber *align = [props objectForKey: @"align"]; // not used yet
+  // NSNumber *position = [props objectForKey: @"position"]; // not used yet
+  // NSNumber *align = [props objectForKey: @"align"]; // not used yet
   NSNumber *autoHide = [props objectForKey: @"autoHide"];
   NSNumber *duration = [props objectForKey: @"duration"];
   NSNumber *clickToHide = [props objectForKey: @"clickToHide"];
@@ -47,16 +47,19 @@ RCT_EXPORT_METHOD(Show:(nonnull NSNumber *)targetViewTag inParentView:(nonnull N
   NSString *tintColor = [props objectForKey: @"tintColor"];
   NSString *textColor = [props objectForKey: @"textColor"];
   NSNumber *textSize = [props objectForKey: @"textSize"];
-//  NSNumber *gravity = [props objectForKey: @"gravity"]; not used yet
+  // NSNumber *gravity = [props objectForKey: @"gravity"]; not used yet
   NSNumber *shadow = [props objectForKey: @"shadow"];
   NSNumber *arrow = [props objectForKey: @"arrow"];
+  NSNumber *paddingHorizontal = [props objectForKey: @"paddingHorizontal"];
+  NSNumber *paddingVertical = [props objectForKey: @"paddingVertical"];
 
     NSMutableAttributedString *attributes = [[NSMutableAttributedString alloc] initWithString: text];
     [attributes addAttribute:NSForegroundColorAttributeName value:[RNTooltips colorFromHexCode: textColor] range:NSMakeRange(0, text.length)];
     [attributes addAttribute:NSFontAttributeName value: [UIFont systemFontOfSize: [textSize floatValue]] range:NSMakeRange(0,text.length)];
 
-    toolTip = [[SexyTooltip alloc] initWithAttributedString: attributes sizedToView:parentView];
-    toolTip.layer.zPosition = 9999; // make sure the tooltips is always in front of other views.
+    toolTip = [[SexyTooltip alloc] initWithAttributedString:attributes sizedToView:parentView];
+
+    /* toolTip.layer.zPosition = 9999; // make sure the tooltips is always in front of other views. */
 
     TooltipDelegate *delegate = [[TooltipDelegate alloc] init];
     delegate.onHide = onHide;
@@ -65,8 +68,15 @@ RCT_EXPORT_METHOD(Show:(nonnull NSNumber *)targetViewTag inParentView:(nonnull N
     toolTip.color = [RNTooltips colorFromHexCode: tintColor];
     toolTip.cornerRadius = [corner floatValue];
     toolTip.dismissesOnTap = [clickToHide boolValue];
-    toolTip.padding = UIEdgeInsetsMake(6.0, 8.0, 6.0, 8.0);
-    
+
+    CGFloat defaultPaddingVertical = 6.0;
+    CGFloat defaultPaddingHorizontal = 10.0;
+
+    CGFloat pHor = paddingHorizontal ? [paddingHorizontal floatValue] : defaultPaddingHorizontal;
+    CGFloat pVer = paddingVertical ? [paddingVertical floatValue] : defaultPaddingVertical;
+
+    toolTip.padding = UIEdgeInsetsMake(pVer, pHor, pVer, pHor);
+
     if (![arrow boolValue]) {
         toolTip.arrowHeight = 0;
     }
