@@ -52,53 +52,66 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
               }
 
               String text = props.getString("text");
-              int position = props.getInt("position");
-              int align = props.getInt("align");
-              boolean autoHide = props.getBoolean("autoHide");
-              int duration = props.getInt("duration");
-              boolean clickToHide = props.getBoolean("clickToHide");
-              int corner = props.getInt("corner");
-              String tintColor = props.getString("tintColor");
               String textColor = props.getString("textColor");
-              int textSize = props.getInt("textSize");
-              int gravity = props.getInt("gravity");
+              String tintColor = props.getString("tintColor");
               boolean arrow = props.getBoolean("arrow");
+              boolean autoHide = props.getBoolean("autoHide");
+              boolean clickToHide = props.getBoolean("clickToHide");
+              int align = props.getInt("align");
+              int corner = props.getInt("corner");
+              int duration = props.getInt("duration");
+              int gravity = props.getInt("gravity");
+              int paddingH = props.getInt("paddingHorizontal");
+              int paddingV = props.getInt("paddingVertical");
+              int position = props.getInt("position");
+              int textSize = props.getInt("textSize");
 
               // parent reference is not required
               // ViewTooltip.on can retrieve the parent Context by itself
               tooltip = ViewTooltip.on(target);
-              tooltip = tooltip.text(text);
+
+              tooltip = tooltip.text(text)
+                      .autoHide(autoHide, duration)
+                      .clickToHide(clickToHide)
+                      .color(Color.parseColor(tintColor))
+                      .corner(corner)
+                      .distanceWithView(0)
+                      .padding(paddingH, paddingV, paddingH, paddingV)
+                      .setTextGravity(gravity)
+                      .textColor(Color.parseColor(textColor))
+                      .textSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
               if (!arrow) {
                 tooltip.arrowHeight(0);
                 tooltip.arrowWidth(0);
               }
 
-              if (position == 1) {
-                tooltip = tooltip.position(ViewTooltip.Position.LEFT);
-              } else if (position == 2) {
-                tooltip = tooltip.position(ViewTooltip.Position.RIGHT);
-              } else if (position == 3) {
-                tooltip = tooltip.position(ViewTooltip.Position.TOP);
-              } else if (position == 4) {
-                tooltip = tooltip.position(ViewTooltip.Position.BOTTOM);
+              switch (position) {
+                case 1:
+                  tooltip = tooltip.position(ViewTooltip.Position.LEFT);
+                  break;
+                case 2:
+                  tooltip = tooltip.position(ViewTooltip.Position.RIGHT);
+                  break;
+                case 3:
+                  tooltip = tooltip.position(ViewTooltip.Position.TOP);
+                  break;
+                case 4:
+                default:
+                  tooltip = tooltip.position(ViewTooltip.Position.BOTTOM);
               }
 
-              if (align == 1) {
-                tooltip = tooltip.align(ViewTooltip.ALIGN.START);
-              } else if (align == 2) {
-                tooltip = tooltip.align(ViewTooltip.ALIGN.CENTER);
-              } else if (align == 3) {
-                tooltip = tooltip.align(ViewTooltip.ALIGN.END);
+              switch (align) {
+                case 2:
+                  tooltip = tooltip.align(ViewTooltip.ALIGN.CENTER);
+                  break;
+                case 3:
+                  tooltip = tooltip.align(ViewTooltip.ALIGN.END);
+                  break;
+                case 1:
+                default:
+                  tooltip = tooltip.align(ViewTooltip.ALIGN.START);
               }
-
-              tooltip = tooltip.autoHide(autoHide, duration);
-              tooltip = tooltip.clickToHide(clickToHide);
-              tooltip = tooltip.corner(corner);
-              tooltip = tooltip.color(Color.parseColor(tintColor));
-              tooltip = tooltip.textColor(Color.parseColor(textColor));
-              tooltip = tooltip.textSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-              tooltip = tooltip.setTextGravity(gravity);
 
               tooltip.onHide(new ViewTooltip.ListenerHide() {
                 @Override

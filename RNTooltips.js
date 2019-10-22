@@ -69,7 +69,6 @@ class Tooltips extends PureComponent {
     shadow: true,
     paddingVertical: 6,
     paddingHorizontal: 8,
-
   };
 
   static Show(target, parent, props) {

@@ -36,7 +36,7 @@ RCT_EXPORT_METHOD(Show:(nonnull NSNumber *)targetViewTag inParentView:(nonnull N
     // parent is null, then return
     return;
   }
-    
+
   NSString *text = [props objectForKey: @"text"];
   // NSNumber *position = [props objectForKey: @"position"]; // not used yet
   // NSNumber *align = [props objectForKey: @"align"]; // not used yet
