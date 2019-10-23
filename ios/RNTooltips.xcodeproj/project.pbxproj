@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* RNTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNTooltips.m */; };
-		CCE5160CD87BF3A3D91463CF /* libPods-RNTooltips.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07CB86D884D7B6AC1F3E087 /* libPods-RNTooltips.a */; };
-		CE1E4A23202C461F00D7F75F /* libSexyTooltip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1E4A22202C461C00D7F75F /* libSexyTooltip.a */; };
 		CE1E4A39202C571200D7F75F /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1E4A20202C461C00D7F75F /* libpop.a */; };
+		F25BA397236198B00068FC8D /* libSexyTooltip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1E4A22202C461C00D7F75F /* libSexyTooltip.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +55,6 @@
 		B3E7B5891CC2AC0600A0062D /* RNTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTooltips.m; sourceTree = "<group>"; };
 		BB6838FF2B20267EA32EB3B1 /* Pods-RNTooltips.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTooltips.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNTooltips/Pods-RNTooltips.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1E4A17202C461C00D7F75F /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
-		F07CB86D884D7B6AC1F3E087 /* libPods-RNTooltips.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTooltips.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F25BA397236198B00068FC8D /* libSexyTooltip.a in Frameworks */,
 				CE1E4A39202C571200D7F75F /* libpop.a in Frameworks */,
-				CE1E4A23202C461F00D7F75F /* libSexyTooltip.a in Frameworks */,
-				CCE5160CD87BF3A3D91463CF /* libPods-RNTooltips.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				CE1E4A17202C461C00D7F75F /* Pods.xcodeproj */,
-				F07CB86D884D7B6AC1F3E087 /* libPods-RNTooltips.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -160,6 +156,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
