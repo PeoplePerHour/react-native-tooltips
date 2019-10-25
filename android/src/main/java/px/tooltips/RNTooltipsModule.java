@@ -1,12 +1,13 @@
-
 package px.tooltips;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
@@ -70,16 +71,20 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
               // ViewTooltip.on can retrieve the parent Context by itself
               tooltip = ViewTooltip.on(target);
 
-              tooltip = tooltip.text(text)
+              ViewTooltip.TooltipView tooltipView = new PPHTooltipView(reactContext);
+
+              tooltipView.setText(text);
+              tooltipView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
+              tooltipView.setTextGravity(gravity);
+              tooltipView.setTextColor(Color.parseColor(textColor));
+
+              tooltip = tooltip
+                      .customView(tooltipView)
                       .autoHide(autoHide, duration)
                       .clickToHide(clickToHide)
                       .color(Color.parseColor(tintColor))
                       .corner(corner)
-                      .distanceWithView(0)
-                      .padding(paddingH, paddingV, paddingH, paddingV)
-                      .setTextGravity(gravity)
-                      .textColor(Color.parseColor(textColor))
-                      .textSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+                      .padding(paddingH, paddingV, paddingH, paddingV);
 
               if (!arrow) {
                 tooltip.arrowHeight(0);
@@ -127,8 +132,28 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
         }
       });
 
+  }
 
-  
+  public static class PPHTooltipView extends ViewTooltip.TooltipView {
+    ReactContext mContext;
+
+    public PPHTooltipView(ReactContext context) {
+      super(context);
+
+      setLineHeight(context);
+    }
+
+    public void setLineHeight(ReactContext context) {
+      float extraSpacing = TypedValue.applyDimension(
+              TypedValue.COMPLEX_UNIT_DIP,
+              3,
+              context.getResources().getDisplayMetrics()
+      );
+
+      ((TextView) this.childView).setLineSpacing(extraSpacing, 1f);
+
+      postInvalidate();
+    }
   }
 
   @ReactMethod
