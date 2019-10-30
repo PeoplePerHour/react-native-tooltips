@@ -32,9 +32,10 @@ android {
 repositories {
     mavenCentral()
     maven { url "https://maven.google.com" }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.github.florent37:viewtooltip:1.1.6'
+    implementation 'com.github.koox00:ViewTooltip:v1.1.8'
 }

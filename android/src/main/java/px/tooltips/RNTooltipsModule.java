@@ -64,6 +64,8 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
               int gravity = props.getInt("gravity");
               int paddingH = props.getInt("paddingHorizontal");
               int paddingV = props.getInt("paddingVertical");
+              int marginV = props.getInt("marginVertical");
+              int marginH = props.getInt("marginHorizontal");
               int position = props.getInt("position");
               int textSize = props.getInt("textSize");
 
@@ -84,6 +86,7 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
                       .clickToHide(clickToHide)
                       .color(Color.parseColor(tintColor))
                       .corner(corner)
+                      .margin(marginH, marginV, marginH, marginV)
                       .padding(paddingH, paddingV, paddingH, paddingV);
 
               if (!arrow) {

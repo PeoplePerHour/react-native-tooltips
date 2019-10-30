@@ -51,6 +51,8 @@ class Tooltips extends PureComponent {
     onHide: PropTypes.func,
     paddingVertical: PropTypes.number,
     paddingHorizontal: PropTypes.number,
+    marginVertical: PropTypes.number,
+    marginHorizontal: PropTypes.number,
   };
 
   static defaultProps = {
@@ -69,6 +71,8 @@ class Tooltips extends PureComponent {
     shadow: true,
     paddingVertical: 6,
     paddingHorizontal: 8,
+    marginVertical: 0,
+    marginHorizontal: 0,
   };
 
   static Show(target, parent, props) {
@@ -124,6 +128,12 @@ class Tooltips extends PureComponent {
     if (props.paddingVertical === undefined) {
       props.paddingVertical = Tooltips.defaultProps.paddingVertical;
     }
+    if (props.marginHorizontal === undefined) {
+      props.marginHorizontal = Tooltips.defaultProps.marginHorizontal;
+    }
+    if (props.marginVertical === undefined) {
+      props.marginVertical = Tooltips.defaultProps.marginVertical;
+    }
 
     RNTooltips.Show(target, parent, props, () => {
       props.onHide && props.onHide();
@@ -160,6 +170,8 @@ class Tooltips extends PureComponent {
           onHide: this.props.onHide,
           paddingVertical: this.props.paddingVertical,
           paddingHorizontal: this.props.paddingHorizontal,
+          marginVertical: this.props.marginVertical,
+          marginHorizontal: this.props.marginHorizontal,
         }
       );
     } else if (this.props.visible === false && this.props.target) {
