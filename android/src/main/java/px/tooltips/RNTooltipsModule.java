@@ -73,11 +73,11 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
               // ViewTooltip.on can retrieve the parent Context by itself
               tooltip = ViewTooltip.on(target);
 
-              ViewTooltip.TooltipView tooltipView = new PPHTooltipView(reactContext);
+              TextView tooltipView = new PPHTooltipView(reactContext);
 
               tooltipView.setText(text);
               tooltipView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
-              tooltipView.setTextGravity(gravity);
+              tooltipView.setGravity(gravity);
               tooltipView.setTextColor(Color.parseColor(textColor));
 
               tooltip = tooltip
@@ -137,7 +137,7 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
 
   }
 
-  public static class PPHTooltipView extends ViewTooltip.TooltipView {
+  public static class PPHTooltipView extends android.support.v7.widget.AppCompatTextView {
     ReactContext mContext;
 
     public PPHTooltipView(ReactContext context) {
@@ -153,7 +153,7 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
               context.getResources().getDisplayMetrics()
       );
 
-      ((TextView) this.childView).setLineSpacing(extraSpacing, 1f);
+      setLineSpacing(extraSpacing, 1f);
 
       postInvalidate();
     }
