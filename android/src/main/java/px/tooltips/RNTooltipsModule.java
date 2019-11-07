@@ -5,6 +5,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -124,7 +125,11 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
               tooltip.onHide(new ViewTooltip.ListenerHide() {
                 @Override
                 public void onHide(View view) {
-                  onHide.invoke();
+                  try {
+                    onHide.invoke();
+                  } catch (Throwable e) {
+                    Log.e("PPHAndroid", "[RNTooltips] Exception", e);
+                  }
                 }
               });
 
