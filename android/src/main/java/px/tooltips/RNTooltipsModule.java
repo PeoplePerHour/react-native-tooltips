@@ -69,6 +69,7 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
               int marginH = props.getInt("marginHorizontal");
               int position = props.getInt("position");
               int textSize = props.getInt("textSize");
+              boolean shadow = props.getBoolean("shadow");
 
               // parent reference is not required
               // ViewTooltip.on can retrieve the parent Context by itself
@@ -122,6 +123,15 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
                   tooltip = tooltip.align(ViewTooltip.ALIGN.START);
               }
 
+              tooltip = tooltip.autoHide(autoHide, duration);
+              tooltip = tooltip.clickToHide(clickToHide);
+              tooltip = tooltip.corner(corner);
+              tooltip = tooltip.color(Color.parseColor(tintColor));
+              tooltip = tooltip.textColor(Color.parseColor(textColor));
+              tooltip = tooltip.textSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+              tooltip = tooltip.setTextGravity(gravity);
+              tooltip = tooltip.withShadow(shadow);
+
               tooltip.onHide(new ViewTooltip.ListenerHide() {
                 @Override
                 public void onHide(View view) {
@@ -166,12 +176,16 @@ public class RNTooltipsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void Dismiss(final int view) {
+    reactContext.runOnUiQueueThread(new Runnable() {
+      @Override
+      public void run() {
+        if (tooltip == null) {
+          return;
+        }
 
-    if (tooltip == null) {
-      return;
-  }
-
-    tooltip.close();
-    tooltip = null;
+        tooltip.close();
+        tooltip = null;
+      }
+    });
   }
 }
